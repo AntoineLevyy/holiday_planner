@@ -1,6 +1,6 @@
 import streamlit as st
 import openai
-from holiday_planner.environ import OPENAI_API_KEY
+from environ import OPENAI_API_KEY
 
 st.set_page_config('dark')
 
