@@ -6,7 +6,7 @@ import os
 st.set_page_config('dark')
 
 # Load environment variables from the .env file
-load_dotenv('.environ')
+load_dotenv('.env')
 
 # Access the API key
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
