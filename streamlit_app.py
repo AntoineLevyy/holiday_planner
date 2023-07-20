@@ -1,15 +1,8 @@
 import streamlit as st
 import openai
-from dotenv import load_dotenv
 import os
 
 st.set_page_config('dark')
-
-# Load environment variables from the .env file
-load_dotenv('.env')
-
-# Access the API key
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 city = st.text_input("Where are you going?")
 n_days = st.text_input("How many days?")
