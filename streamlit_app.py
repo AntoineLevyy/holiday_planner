@@ -3,10 +3,15 @@ import openai
 import os
 
 st.set_page_config(
-    page_title="Plan the perfect holiday", page_icon=None, layout="centered", 
+    page_title="Plan the perfect holiday", 
+    page_icon=None, 
+    layout="centered", 
     initial_sidebar_state="auto", 
-    menu_items={"Github": "https://github.com/AntoineLevyy/holiday_planner/tree/main",
-                 "Contact": "memorise.it.pro@gmail.com" })
+    menu_items= {
+        "about": "https://github.com/AntoineLevyy/holiday_planner/tree/main",
+        "home": "You are there" 
+        }
+ )
 
 city = st.text_input("Where are you going?")
 n_days = st.text_input("How many days?")
