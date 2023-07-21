@@ -68,7 +68,7 @@ def open_ai_plan_edited(city, n_days, last_reco,more,less):
     recommendations = recommendations.replace("\n\n","")
     return recommendations
 
-@st.cache
+@st.cache(allow_output_mutation=True)
 def create_download_link(ics_content, filename):
     b64 = base64.b64encode(ics_content.encode()).decode()  # encode to base64
     href = f'<a href="data:text/calendar;base64,{b64}" download="{filename}">Download your calendar event</a>'
