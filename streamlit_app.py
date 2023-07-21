@@ -8,12 +8,24 @@ import base64
 import re
 
 
+
 st.set_page_config(
     page_title="Plan the perfect holiday", 
     page_icon=None, 
     layout="centered", 
     initial_sidebar_state="auto"
+    
  )
+
+# Setting the page to darkmode
+dark = '''
+<style>
+    .stApp {
+    background-color: black;
+    }
+</style>
+'''
+st.markdown(dark, unsafe_allow_html=True)
 
 # Title and subtitle in HTML
 st.markdown(
@@ -38,7 +50,7 @@ city = city_col.text_input("Where are you going?")
 n_days = n_days_col.text_input("How many days?")
 
 
-@st.cache
+@st.cache(allow_output_mutation=True)
 def open_ai_plan_initial(city, n_days):
     openai.api_key = st.secrets["OPENAI_API_KEY"]
     open_ai_response = openai.Completion.create(
@@ -53,7 +65,7 @@ def open_ai_plan_initial(city, n_days):
     text_resume = text_resume.replace("\n\n","")
     return text_resume
 
-@st.cache
+@st.cache(allow_output_mutation=True)
 def open_ai_plan_edited(city, n_days, last_reco,more,less):
     openai.api_key = st.secrets["OPENAI_API_KEY"]
     open_ai_response = openai.Completion.create(
