@@ -17,7 +17,7 @@ n_days = st.text_input("How many days?")
 
 
 def open_ai_plan_initial(city, n_days):
-    openai.api_key = st.secrets("OPENAI_API_KEY")
+    openai.api_key = st.secrets["OPENAI_API_KEY"]
     open_ai_response = openai.Completion.create(
     model="text-davinci-003",
     prompt=f"What should I do on holliday in {city} during {n_days} days. Give me each activity in its on line.",
@@ -31,7 +31,7 @@ def open_ai_plan_initial(city, n_days):
     return text_resume
 
 def open_ai_plan_edited(city, n_days, last_reco,more,less):
-    openai.api_key = st.secrets("OPENAI_API_KEY")
+    openai.api_key = st.secrets["OPENAI_API_KEY"]
     open_ai_response = openai.Completion.create(
     model="text-davinci-003",
     prompt=f"Can you edit my  activities for {city} where I am spending {n_days} days. The last time you gave this {last_reco}, its good but I want more {more} and less {less}. Give me each activity in its on line.",
