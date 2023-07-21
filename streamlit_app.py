@@ -21,7 +21,7 @@ st.set_page_config(
 dark = '''
 <style>
     .stApp {
-    background-color: black;
+    theme: black;
     }
 </style>
 '''
@@ -50,7 +50,7 @@ city = city_col.text_input("Where are you going?")
 n_days = n_days_col.text_input("How many days?")
 
 
-@st.cache(allow_output_mutation=True)
+# @st.cache(allow_output_mutation=True)
 def open_ai_plan_initial(city, n_days):
     openai.api_key = st.secrets["OPENAI_API_KEY"]
     open_ai_response = openai.Completion.create(
@@ -65,7 +65,7 @@ def open_ai_plan_initial(city, n_days):
     text_resume = text_resume.replace("\n\n","")
     return text_resume
 
-@st.cache(allow_output_mutation=True)
+# @st.cache(allow_output_mutation=True)
 def open_ai_plan_edited(city, n_days, last_reco,more,less):
     openai.api_key = st.secrets["OPENAI_API_KEY"]
     open_ai_response = openai.Completion.create(
@@ -80,7 +80,7 @@ def open_ai_plan_edited(city, n_days, last_reco,more,less):
     recommendations = recommendations.replace("\n\n","")
     return recommendations
 
-@st.cache(allow_output_mutation=True)
+# @st.cache(allow_output_mutation=True)
 def create_download_link(ics_content, filename):
     b64 = base64.b64encode(ics_content.encode()).decode()  # encode to base64
     href = f'<a href="data:text/calendar;base64,{b64}" download="{filename}">Download your calendar event</a>'
