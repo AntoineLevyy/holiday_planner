@@ -1,6 +1,7 @@
 import streamlit as st
 import openai
 import os
+import ics
 from ics import Calendar, Event
 from datetime import datetime
 import base64
