@@ -1,0 +1,9 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:ics.py - http://git.io/lLljaA
+BEGIN:VEVENT
+DTSTART:20230721T000000Z
+SUMMARY:Take a boat trip around the island and explore its stunning coastline.
+UID:9144d4e4-59f6-43ee-9c86-2c385e24c807@9144.org
+END:VEVENT
+END:VCALENDAR
