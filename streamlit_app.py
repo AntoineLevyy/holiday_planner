@@ -13,8 +13,7 @@ st.set_page_config(
     page_title="Plan the perfect holiday", 
     page_icon=None, 
     layout="centered", 
-    initial_sidebar_state="auto",
-    theme={"base": "dark"}
+    initial_sidebar_state="auto"
     
  )
 
