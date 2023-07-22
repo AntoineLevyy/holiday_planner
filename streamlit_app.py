@@ -41,9 +41,8 @@ city_col, n_days_col = st.columns(2)
 city = city_col.text_input("Where are you going?")
 n_days = n_days_col.text_input("How many days?")
 
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
-# openai.api_key = st.secrets["OPENAI_API_KEY"]
-openai.api_key = "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"
 @st.cache
 def open_ai_plan_initial(city, n_days):
     open_ai_response = openai.Completion.create(
