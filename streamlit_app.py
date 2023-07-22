@@ -45,7 +45,6 @@ n_days = n_days_col.text_input("How many days?")
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 @st.cache
 def open_ai_plan_initial(city, n_days):
-    openai.api_key = st.secrets["OPENAI_API_KEY"]
     open_ai_response = openai.Completion.create(
     model="text-davinci-003",
     prompt=f"What should I do on holliday in {city} during {n_days} days. Give me each activity in its on line.",
