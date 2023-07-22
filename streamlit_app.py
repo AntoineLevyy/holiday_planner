@@ -95,6 +95,7 @@ if city != "" and n_days != "":
     st.write(" ")
     st.write(" ")
     st.markdown("<div style ='text-align: center;'>Add a recommended activity to your calendar</div>",unsafe_allow_html=True)
+
     selected_recommendation = st.selectbox("Select an activity",recommendations_1[1:])
     selected_date = st.date_input("Select a date for the activity")
     # Create a new .ics calendar events
@@ -127,7 +128,7 @@ if city != "" and n_days != "":
         recommendations_2 = new_reco.split(". ")
         recommendations_2 = [re.sub(r'\s\d+$', '', recommendation) for recommendation in recommendations_2 if recommendation]
         st.write(recommendations_2[2])
-        st.write("Add a recommended activity to your calender")
+        st.markdown("<div style ='text-align: center;'>Add a recommended activity to your calendar</div>",unsafe_allow_html=True)
         selected_recommendation_2 = st.selectbox("Select an activity",recommendations_2[1:])
         selected_date_two = st.date_input("Select a date for the new activity")
         # Create a new .ics calendar event
