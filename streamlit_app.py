@@ -42,6 +42,7 @@ city = city_col.text_input("Where are you going?")
 n_days = n_days_col.text_input("How many days?")
 
 
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 @st.cache
 def open_ai_plan_initial(city, n_days):
     openai.api_key = st.secrets["OPENAI_API_KEY"]
@@ -55,12 +56,10 @@ def open_ai_plan_initial(city, n_days):
 
     text_resume = open_ai_response['choices'][0]['text']
     text_resume = text_resume.replace("\n\n","")
-    text_resume = frozenset(text_resume)
     return text_resume
 
 @st.cache
 def open_ai_plan_edited(city, n_days, last_reco,more,less):
-    openai.api_key = st.secrets["OPENAI_API_KEY"]
     open_ai_response = openai.Completion.create(
     model="text-davinci-003",
     prompt=f"Can you edit my  activities for {city} where I am spending {n_days} days. The last time you gave this {last_reco}, but actually I would like a new list with more  {more} and less {less}. Give me each activity in its on line.",
@@ -71,7 +70,6 @@ def open_ai_plan_edited(city, n_days, last_reco,more,less):
 
     recommendations = open_ai_response['choices'][0]['text']
     recommendations = recommendations.replace("\n\n","")
-    recommendations = frozenset(recommendations)
     return recommendations
 
 @st.cache
