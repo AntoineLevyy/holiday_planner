@@ -1,1 +1,3 @@
-# holiday_planner
+# WIP: Holiday Planner streamlit app
+
+https://holiday-plan.streamlit.app/
