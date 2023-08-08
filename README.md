@@ -7,6 +7,6 @@ Functionalities:
 - Access the weather forecast for your destination.
 
 Tools:
-Frontend: streamlit
-API connections: Open AI, Openweather.
+-Frontend: streamlit
+-API connections: Open AI, Openweather.
 
