@@ -36,7 +36,7 @@ st.write(" ")
 st.write(" ")
 
 
-openai.api_key = st.secrets["OPENAI_API_KEy"]
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 open_weather_api_key = st.secrets["OPENWEATHER_API_KEY"]
 
 @st.cache
