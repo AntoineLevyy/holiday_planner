@@ -90,7 +90,8 @@ if city != "" and n_days != "":
   if "feature" not in st.session_state:
     st.session_state["feature"] = ""
 
-  activities, weather, hotels = st.columns(3)
+  #aligning the columns  
+  left_spacer, activities, center_spacer, weather, right_spacer, hotels = st.columns([1, 2, 1, 2, 1, 2])
   activities_button = activities.button("Find some cool things to do")
   weather_button = weather.button("Check the weather")
   hotels_button = hotels.button("Find an accomodation")
@@ -164,65 +165,6 @@ if city != "" and n_days != "":
             c.events.add(e)
 
             st.markdown(create_download_link(str(c), "recommendation.ics"), unsafe_allow_html=True)
-
-        ## Allowing for a change in recommendation
-        if "Second Plan" not in st.session_state:
-            st.session_state["Second Plan"] = ""
-        st.write(" ")
-        st.markdown("<div style='text-align: center;'>Make some changes to the recommendations</div>", unsafe_allow_html=True)
-        more_col, less_col = st.columns(2)
-        more_col.write(" ") #this allows for the selectbox to show below the col placeholder
-        more = more_col.selectbox("More of", activity_types)
-        less_col.write(" ") #this allows for the selectbox to show below the col placeholder
-        less = less_col.selectbox("Less of", activity_types)
-        if more != "" and less != "":               
-            edit_plan_button = st.button("Generate New Plan")
-            if edit_plan_button:
-                st.session_state["Second Plan"] = "Generated"
-            if st.session_state["Second Plan"] == "Generated":
-                new_reco_full = open_ai_plan_edited(city, n_days, last_reco, more, less)
-                new_reco = re.sub(r'\(.*?\)', '', new_reco_full)
-                new_reco = re.sub(r'\(.*$', '', new_reco)
-                st.session_state["reco"] = new_reco
-                st.write(st.session_state["reco"])
-                st.write(" ")
-                st.write(" ")
-
-                ## View on maps and Add to calendar##
-                #creating a dataframe for maps
-                new_dict_coordinates = {}
-                new_reco_full = new_reco_full.strip().split('\n')
-
-                for reco in new_reco_full:
-                    if reco:
-                        activity, coordinates = re.findall(r"(.*?)(\(.*|$)", reco)[0]
-                        key = re.sub(r'\d+\. ', '', activity).strip() # removing leading/trailing whitespaces and digits from the description
-                        value = coordinates.strip("()")  # removing brackets from coordinates
-                        new_dict_coordinates[key] = value
-                    
-                #Getting the list of recommended activities and creating a selectbox
-                new_activities = list(new_dict_coordinates.keys())
-                #Select the activity desired
-                new_selected_recommendation = st.selectbox("Select a new activity",new_activities)
-
-                #Output the selected activity on maps
-                new_maps_data = [{"Activity": key, "latitude": float(value.split(", ")[0]), "longitude": float(value.split(", ")[1])} 
-                for key, value in new_dict_coordinates.items()]
-                new_maps_df_all = pd.DataFrame(new_maps_data)  
-                new_maps_df_selected = pd.DataFrame(new_maps_df_all[new_maps_df_all["Activity"]==new_selected_recommendation])
-                st.map(new_maps_df_selected) 
-
-
-                ##Add to calendar###      
-                new_selected_date = st.date_input("Select a date for the new activity")
-                # Create a new .ics calendar event
-                if st.button("Add new activity to calendar"):
-                    c = Calendar()
-                    e = Event()
-                    e.name = new_selected_recommendation
-                    e.begin = datetime.combine(new_selected_date, datetime.min.time()) # use selected date with minimum time
-                    c.events.add(e)
-                    st.markdown(create_download_link(str(c), "recommendation.ics"), unsafe_allow_html=True)
 
   elif st.session_state["feature"] == "weather":
     geo_response = requests.get(f"http://api.openweathermap.org/geo/1.0/direct?q={city}&limit=5&appid={open_weather_api_key}").json()
