@@ -54,20 +54,6 @@ def open_ai_plan_initial(city, n_days):
     text_resume = text_resume.replace("° N", "").replace("° W", "").replace("° E", "").replace("° S", "").replace("°", "")
     return text_resume
 
-@st.cache
-def open_ai_plan_edited(city, n_days, last_reco,more,less):
-    open_ai_response = openai.Completion.create(
-    model="text-davinci-003",
-    prompt=f"What should I do on holliday in {city} during {n_days} days. The last time you gave this {last_reco}. I want more {more} and less {less} please format your answer exactly as you did here {open_ai_plan_initial} including the latitude and longitude numbers.",
-    max_tokens=250,
-    temperature=0,
-    top_p = 0.3
-    )
-
-    recommendations = open_ai_response['choices'][0]['text']
-    recommendations = recommendations.replace("\n\n","")
-    recommendations = recommendations.replace("° N", "").replace("° W", "").replace("° E", "").replace("° S", "").replace("°", "")
-    return recommendations
 
 @st.cache
 def create_download_link(ics_content, filename):
@@ -75,8 +61,6 @@ def create_download_link(ics_content, filename):
     href = f'<a href="data:text/calendar;base64,{b64}" download="{filename}">Download your calendar event</a>'
     return href
 
-
-activity_types = ["","museums", "sightseeing", "partying", "restaurants", "shopping"]
 
 # Creating columns to have the text input side by side
 city_col, n_days_col = st.columns(2)
