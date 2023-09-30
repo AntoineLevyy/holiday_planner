@@ -3,7 +3,9 @@
 https://holiday-plan.streamlit.app/
 
 Functionalities: 
-- Find activities for your upcoming trip, add them to your calendar and refine the proposed list of activities.
+- Find activities for your upcoming trip.
+- View their location on a map.
+- Add them to your calendar and refine the proposed list of activities.
 - Access the weather forecast for your destination.
 
 Tools:
